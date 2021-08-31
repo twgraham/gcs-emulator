@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B19A2A9C-D216-4671-BB50-5133164D4220}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{49A68ADA-CD70-4508-B1C2-9AF110552581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCSEmulator", "src\GCSEmulator\GCSEmulator.csproj", "{2427F2E8-0FEB-490F-A5A5-2778C83A257A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCSEmulator.Tests", "test\GCSEmulator.Tests\GCSEmulator.Tests.csproj", "{1022115A-DEBB-465E-9EC4-55CDF40D37E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2427F2E8-0FEB-490F-A5A5-2778C83A257A} = {B19A2A9C-D216-4671-BB50-5133164D4220}
+		{1022115A-DEBB-465E-9EC4-55CDF40D37E0} = {49A68ADA-CD70-4508-B1C2-9AF110552581}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2427F2E8-0FEB-490F-A5A5-2778C83A257A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2427F2E8-0FEB-490F-A5A5-2778C83A257A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2427F2E8-0FEB-490F-A5A5-2778C83A257A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2427F2E8-0FEB-490F-A5A5-2778C83A257A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1022115A-DEBB-465E-9EC4-55CDF40D37E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1022115A-DEBB-465E-9EC4-55CDF40D37E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1022115A-DEBB-465E-9EC4-55CDF40D37E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1022115A-DEBB-465E-9EC4-55CDF40D37E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
