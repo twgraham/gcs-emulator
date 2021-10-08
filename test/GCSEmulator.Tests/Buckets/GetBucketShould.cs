@@ -1,7 +1,8 @@
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using GCSEmulator.Data.Models.Buckets;
-using Google.Cloud.Storage.V1;
+using Google;
 using Xunit;
 
 namespace GCSEmulator.Tests.Buckets
@@ -45,7 +46,10 @@ namespace GCSEmulator.Tests.Buckets
 
             await _fixtures.StorageClient.DeleteBucketAsync(createdBucket.Name);
 
-            (await _fixtures.StorageClient.GetBucketAsync(createdBucket.Name)).Should().BeNull();
+            var exception = await _fixtures.StorageClient.Awaiting(x => x.GetBucketAsync(createdBucket.Name))
+                .Should().ThrowAsync<GoogleApiException>();
+
+            exception.And.HttpStatusCode.Should().Be(HttpStatusCode.NotFound);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using GCSEmulator.Data.Models.Buckets;
 using GCSEmulator.Dtos.Shared;
 using JetBrains.Annotations;
@@ -63,7 +64,7 @@ namespace GCSEmulator.Dtos.Buckets
                 Billing = BillingDto.Create(bucket.Billing),
                 Cors = bucket.Cors.Select(CorsEntryDto.Create).ToList(),
                 Encryption = EncryptionDto.Create(bucket.Encryption),
-                Etag = bucket.GetHashCode().ToString(),
+                Etag = Convert.ToBase64String(Encoding.UTF8.GetBytes(bucket.Updated.ToString("u"))), // bucket.GetHashCode().ToString(),
                 Id = bucket.Name,
                 Name = bucket.Name,
                 Labels = bucket.Labels,

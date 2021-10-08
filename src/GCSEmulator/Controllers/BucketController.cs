@@ -49,6 +49,9 @@ namespace GCSEmulator.Controllers
                 .Where(x => x.Name == bucketName, true)
                 .FirstOrDefaultAsync();
 
+            if (storageBucket == null)
+                return NotFound();
+
             return BucketResourceDto.Create(storageBucket, projection);
         }
 
@@ -97,7 +100,6 @@ namespace GCSEmulator.Controllers
                 Items = buckets.Select(x => BucketResourceDto.Create(x, projection)).ToList(),
                 NextPageToken = buckets.Count > 0 ? buckets[^1]?.Name : null
             };
-
         }
 
         /// <summary>
@@ -122,14 +124,21 @@ namespace GCSEmulator.Controllers
             await _session.StoreAsync(storageBucket);
             await _session.SaveChangesAsync();
 
-            return CreatedAtAction("GetBucket", new { bucketName = storageBucket.Name },
+            return CreatedAtAction("GetBucketByName", new { bucketName = storageBucket.Name },
                 BucketResourceDto.Create(storageBucket, projection));
         }
 
-        [HttpDelete]
-        public Task<IActionResult> DeleteBucket()
+        [HttpDelete("{bucketName}")]
+        public async Task<IActionResult> DeleteBucket([FromRoute] string bucketName)
         {
-            throw new NotImplementedException();
+            var storageBucket = await _session.Query<Bucket, Buckets_ByName>()
+                .Where(x => x.Name == bucketName, true)
+                .FirstOrDefaultAsync();
+
+            _session.Delete(storageBucket);
+            await _session.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

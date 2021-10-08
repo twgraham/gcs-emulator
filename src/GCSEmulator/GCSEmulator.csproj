@@ -11,6 +11,7 @@
         <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
         <PackageReference Include="RavenDB.Embedded" Version="5.2.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
+        <PackageReference Include="System.IO.Pipelines" Version="5.0.1" />
     </ItemGroup>
 
 </Project>
