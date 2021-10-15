@@ -57,7 +57,7 @@ namespace GCSEmulator
         private static void InitializeAndConfigureRavenDb(IServiceCollection services, IConfiguration configuration)
         {
             var ravenDbConfig = configuration.GetSection("RavenDB");
-            var serverOptions = new ServerOptions();
+            var serverOptions = new ServerOptions { ServerUrl = ravenDbConfig.GetValue<string?>("ServerUrl") };
             var overrideFrameworkVersion = ravenDbConfig.GetValue<string?>("FrameworkVersion");
 
             if (overrideFrameworkVersion != null)

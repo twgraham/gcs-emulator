@@ -140,5 +140,28 @@ namespace GCSEmulator.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("{bucketName}")]
+        public async Task<IActionResult> UpdateBucket([FromRoute] string bucketName,
+            [FromBody] UpdateBucketResourceDto bucketUpdateDto,
+            [FromQuery] long ifMetagenerationMatch,
+            [FromQuery] long ifMetagenerationNotMatch,
+            [FromQuery] PredefinedAcl predefinedAcl,
+            [FromQuery] PredefinedObjectAcl predefinedObjectAcl,
+            [FromQuery] Projection projection)
+        {
+            var storageBucket = await _session.Query<Bucket, Buckets_ByName>()
+                .Where(x => x.Name == bucketName)
+                .FirstOrDefaultAsync();
+
+            if (storageBucket == null)
+                return NotFound();
+
+            bucketUpdateDto.ApplyTo(storageBucket);
+
+            await _session.SaveChangesAsync();
+
+            return Ok(BucketResourceDto.Create(storageBucket, projection));
+        }
     }
 }
